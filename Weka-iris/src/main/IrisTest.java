@@ -22,12 +22,14 @@ public class IrisTest {
 			/**
 			 * Testing the model with hardcoded values
 			 */
-			boolean result1 = wic.isCorrectIris(WekaarffFormat(1.4, 0.2, "Iris-setosa"));
-			boolean result2 = wic.isCorrectIris(WekaarffFormat(1.6, 0.2, "Iris-setosa"));
-			boolean result3 = wic.isCorrectIris(WekaarffFormat(4.5, 1.5, "Iris-setosa"));
-			System.out.println("\nResult 1:- Expected:" + true + " Result:" + result1);
-			System.out.println("Result 2:- Expected:" + true + " Result:" + result2);
-			System.out.println("Result 3:- Expected:" + false + " Result:" + result3);
+			int result1 = wic.isCorrectIris(WekaarffFormat(1.4, 0.2, "Iris-virginica"));
+			System.out.println("\nResult 1:- Expected:Iris-setosa | Result:" + GetLabelName(result1));
+
+			int result2 = wic.isCorrectIris(WekaarffFormat(5, 2, "Iris-versicolor"));
+			System.out.println("Result 2:- Expected:Iris-virginica | Result:" + GetLabelName(result2));
+
+			int result3 = wic.isCorrectIris(WekaarffFormat(4.5, 1.5, "Iris-setosa"));
+			System.out.println("Result 3:- Expected:Iris-versicolor | Result:" + GetLabelName(result3));
 
 		} catch (Exception e) {
 			System.out.println("Initialization Failed");
@@ -44,5 +46,22 @@ public class IrisTest {
 		arffFile += petalLength + "," + petalWidth + "," + prediction + "\n";
 
 		return arffFile;
+	}
+
+	/**
+	 * Determine correct class from result number
+	 */
+	public String GetLabelName(int key) {
+		switch (key) {
+		case 0:
+			return "Iris-setosa";
+		case 1:
+			return "Iris-versicolor";
+		case 2:
+			return "Iris-virginica";
+		default:
+			return "Iris-setosa";
+		}
+
 	}
 }

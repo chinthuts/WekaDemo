@@ -92,19 +92,18 @@ public class WekaIrisClassifier {
 	/**
 	 * Checking if the test data is correctly classified.
 	 */
-	public boolean isCorrectIris(String arff) {
+	public int isCorrectIris(String arff) {
 		try {
 			Instances testData = loadarffFileString(arff);
 			Evaluation evaluator = new Evaluation(trainerData);
 
 			Instance in = testData.instance(0);
 			int prediction = (int) evaluator.evaluateModelOnce(scheme, in);
-
 			// Returns the prediction
-			return prediction == 0 ? true : false;
+			return prediction;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 		}
 	}
 }
